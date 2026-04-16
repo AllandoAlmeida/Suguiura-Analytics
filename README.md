@@ -126,8 +126,55 @@ Baseado em: - Meta atingida - Ticket médio - Desconto
 
 ------------------------------------------------------------------------
 
+
+
 ## 9. Observações
 
 -   Sistema preparado para multiempresa
 -   Estrutura escalável
 -   Foco em análise e decisão
+
+----------------------------------------------------------------------
+
+# 📘 Suguiura-Analytics --- Documentação Oficial v3
+
+------------------------------------------------------------------------
+
+## Estrutura
+
+-   Lojas
+-   Vendedores
+-   Performance Anual (Histórico)
+-   Projeção
+-   Vendas Diárias
+
+------------------------------------------------------------------------
+
+## Regras
+
+-   Projeção baseada no ano anterior
+-   Crescimento configurável
+-   Recalculo em tempo real
+
+------------------------------------------------------------------------
+
+## Dashboard
+
+-   Busca por código do vendedor
+-   Indicadores principais
+-   Gráficos de evolução
+
+------------------------------------------------------------------------
+
+## Arquitetura
+
+-   Backend (API)
+-   Frontend (Dashboard)
+-   Banco (PostgreSQL)
+
+------------------------------------------------------------------------
+
+## Observações
+
+Sistema preparado para SaaS e múltiplas lojas.
+
