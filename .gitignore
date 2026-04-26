@@ -1,0 +1,99 @@
+# ======================================================
+# Suguiura Analytics - .gitignore
+# Projeto híbrido: NestJS + Prisma + FastAPI + Next.js
+# ======================================================
+
+# =========================
+# Node.js / NestJS / Next.js
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+.next/
+out/
+dist/
+build/
+
+# =========================
+# Environment variables
+# =========================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# =========================
+# Prisma
+# =========================
+# Mantemos o schema.prisma versionado.
+# Não ignorar: prisma/schema.prisma
+prisma/dev.db
+prisma/dev.db-journal
+
+# =========================
+# Python / FastAPI
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+ENV/
+
+# =========================
+# Python tools/cache
+# =========================
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log
+
+# =========================
+# Uploads / Temporary files
+# =========================
+uploads/
+tmp/
+temp/
+
+# =========================
+# Excel / local files
+# =========================
+*.xlsx
+*.xls
+~$*.xlsx
+~$*.xls
+
+# =========================
+# Docker / local override
+# =========================
+docker-compose.override.yml
+
+# =========================
+# Coverage
+# =========================
+coverage/
