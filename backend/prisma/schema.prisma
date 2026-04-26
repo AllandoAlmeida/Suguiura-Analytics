@@ -4,10 +4,121 @@
 // Get a free hosted Postgres database in seconds: `npx create-db`
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+model Loja {
+  id     Int     @id
+  nome   String
+  ativo  Boolean @default(true)
+
+  vendedores       Vendedor[]
+  vendasAcumuladas VendaAcumulada[]
+  vendasDiarias    VendaDiaria[]
+  metas            Meta[]
+}
+
+model Vendedor {
+  id     Int     @id @default(autoincrement())
+  codigo String  @unique
+  nome   String
+  ativo  Boolean @default(true)
+
+  lojaAtualId Int
+  lojaAtual   Loja @relation(fields: [lojaAtualId], references: [id])
+
+  vendasAcumuladas VendaAcumulada[]
+  vendasDiarias    VendaDiaria[]
+  metas            Meta[]
+}
+
+model Categoria {
+  id   Int    @id
+  nome String @unique
+
+  vendasAcumuladas VendaAcumulada[]
+  metas            Meta[]
+}
+
+model VendaAcumulada {
+  id Int @id @default(autoincrement())
+
+  lojaId      Int
+  vendedorId  Int
+  categoriaId Int
+
+  ano           Int
+  mes           Int
+  referenciaDia Int
+
+  valor Float
+
+  loja      Loja      @relation(fields: [lojaId], references: [id])
+  vendedor  Vendedor  @relation(fields: [vendedorId], references: [id])
+  categoria Categoria @relation(fields: [categoriaId], references: [id])
+
+  @@index([ano, mes, referenciaDia])
+  @@unique([lojaId, vendedorId, categoriaId, ano, mes, referenciaDia])
+}
+
+model VendaDiaria {
+  id Int @id @default(autoincrement())
+
+  vendedorId Int
+  lojaId     Int
+
+  data DateTime
+
+  valor        Float
+  atendimentos Int
+  devolucoes   Float
+  itens        Int
+  desconto     Float
+
+  vendedor Vendedor @relation(fields: [vendedorId], references: [id])
+  loja     Loja     @relation(fields: [lojaId], references: [id])
+
+  @@unique([vendedorId, data])
+}
+
+model Meta {
+  id Int @id @default(autoincrement())
+
+  nivel TipoNivelMeta
+  tipo  TipoDefinicaoMeta
+
+  lojaId      Int?
+  vendedorId  Int?
+  categoriaId Int?
+
+  ano Int
+  mes Int?
+
+  valor      Float?
+  percentual Float?
+
+  baseAno Int?
+
+  criadoEm DateTime @default(now())
+
+  loja      Loja?      @relation(fields: [lojaId], references: [id])
+  vendedor  Vendedor?  @relation(fields: [vendedorId], references: [id])
+  categoria Categoria? @relation(fields: [categoriaId], references: [id])
+
+  @@index([ano, mes, nivel])
+}
+
+enum TipoNivelMeta {
+  REDE
+  LOJA
+  VENDEDOR
+}
+
+enum TipoDefinicaoMeta {
+  VALOR
+  PERCENTUAL
 }
