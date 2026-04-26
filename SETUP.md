@@ -370,4 +370,5 @@ def calcular_projecao(vendedor_id: int):
 
 # 9. Observação Final
 
+
 Este arquivo deve ser utilizado como guia de setup e laboratório base para este e futuros projetos.
